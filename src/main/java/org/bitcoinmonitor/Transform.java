@@ -11,8 +11,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @Component
-public class CommonJsonTransformer {
-	@Transformer
+public class Transform {
+	@Transformer( outputChannel="files" )
 	public String transformToCommonFormat(String json) throws JsonMappingException, JsonParseException, IOException{
 	ObjectMapper objectMapper = new ObjectMapper();
     

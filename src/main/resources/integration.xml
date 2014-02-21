@@ -21,7 +21,7 @@
      expected-response-type='java.lang.String'
      charset='UTF-8'
      reply-timeout='10000'
-     reply-channel='files'>     
+     reply-channel='transformChannel'>     
  </int-http:outbound-gateway>
  
  <int:inbound-channel-adapter id="bitstampPoller" expression="''" channel="bitStampHttp">
@@ -35,8 +35,10 @@
      expected-response-type='java.lang.String'
      charset='UTF-8'
      reply-timeout='5000'
-     reply-channel='files'>     
+     reply-channel='transformChannel'>     
  </int-http:outbound-gateway>
+
+<int:transformer input-channel="transformChannel" ref="transform" output-channel="files"/>
 
 	<file:outbound-channel-adapter id="files"
 		mode="APPEND" charset="UTF-8" directory="/tmp/si"
