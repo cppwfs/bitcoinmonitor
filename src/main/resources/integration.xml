@@ -10,48 +10,55 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http-2.2.xsd">
 
+<!--  Sample endpoint to make sure data is getting across. -->
+
+	<file:outbound-channel-adapter id="files"
+		mode="APPEND" charset="UTF-8" directory="./"
+		filename-generator-expression="'../../../bitcoin.txt'" />
+
+<!--  Gateways that make the call to retrieve bid info -->
+
+	<int-http:outbound-gateway id='bitstampGateway'
+		request-channel='bitStampHttp' url='https://www.bitstamp.net/api/ticker/'
+		http-method='GET' expected-response-type='java.lang.String' charset='UTF-8'
+		reply-timeout='5000' reply-channel='files'>
+	</int-http:outbound-gateway>
+
+	<int-http:outbound-gateway id='coinbasegateway'
+		request-channel='coinbaseHttp' url='https://coinbase.com/api/v1/prices/buy'
+		http-method='GET' expected-response-type='java.lang.String' charset='UTF-8'
+		reply-timeout='10000' reply-channel='files'>
+	</int-http:outbound-gateway>
+
+<!--  Pollers to call http gateways to get latest bids -->
 
 	<int:inbound-channel-adapter id="coinbasePoller"
 		expression="''" channel="coinbaseHttp">
 		<int:poller fixed-rate="60000" />
 	</int:inbound-channel-adapter>
 
-
-	<int-http:outbound-gateway id='coinbasegateway'
-		request-channel='coinbaseHttp' url='https://coinbase.com/api/v1/prices/buy'
-		http-method='GET' expected-response-type='java.lang.String' charset='UTF-8'
-		reply-timeout='10000' reply-channel='transformChannel'>
-	</int-http:outbound-gateway>
-
 	<int:inbound-channel-adapter id="bitstampPoller"
 		expression="''" channel="bitStampHttp">
 		<int:poller fixed-rate="5000" />
 	</int:inbound-channel-adapter>
 
-	<int-http:outbound-gateway id='bitstampGateway'
-		request-channel='bitStampHttp' url='https://www.bitstamp.net/api/ticker/'
-		http-method='GET' expected-response-type='java.lang.String' charset='UTF-8'
-		reply-timeout='5000' reply-channel='transformChannel'>
-	</int-http:outbound-gateway>
-
+<!-- Phase 3
 	<int:transformer input-channel="transformChannel" ref="transform"
-		output-channel="mqttOut" />
+		output-channel="files" />
+-->
+<!-- Phase 3
 	<int:channel id="mqttOut"></int:channel>
-
+-->
 	<bean id="clientFactory"
 		class="org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory">
 		<property name="userName" value="guest" />
 		<property name="password" value="guest" />
 	</bean>
-
+<!-- Phase 4
 	<int-mqtt:outbound-channel-adapter
 		id="mqttOutbound" client-id="guest" url="tcp://localhost:1883"
 		default-topic="xd.mqtt.test" client-factory="clientFactory" default-qos="1"
 		default-retained="false" channel="mqttOut" />
-
-	<!-- <int:service-activator input-channel="mqttOut" ref="bitCoinMqttClient"/> -->
-	<file:outbound-channel-adapter id="files"
-		mode="APPEND" charset="UTF-8" directory="/tmp/si"
-		filename-generator-expression="'HelloWorld'" />
+ -->
 
 </beans>
