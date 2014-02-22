@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
 // Phase 3
-//@ComponentScan
+@ComponentScan
 // Phase 2
 @Configuration
 // Phase 2
