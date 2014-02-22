@@ -13,7 +13,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
-
+mainClassName="org.bitcoinmonitor.Main"
 jar {
 	baseName = 'bitcoinmonitor-integration'
 	version =  '0.1.0'
