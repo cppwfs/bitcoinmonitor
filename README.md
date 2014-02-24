@@ -57,11 +57,15 @@ Monitors the bids in USD for bitcoin.
  * ./rabbitmq-server start
 
 # Phase 4
+
 ### Start MQTT Monitor
+
 * Open another command window
 * Go to the mqttmonitor directory
 * ./gradlew run -or- gradlew.bat run
+
 ### Setup bitcoinmonitor to send data via MQTT
+
 * Go back to the bitcoinmonitor directory
 * In your favorite editor open 
 * src/main/resources/integration.xml
