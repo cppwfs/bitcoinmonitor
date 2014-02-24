@@ -6,16 +6,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
 // Phase 3
-@ComponentScan
+//@ComponentScan
 // Phase 2
-@Configuration
+//@Configuration
 // Phase 2
-@ImportResource("integration.xml")
+//@ImportResource("integration.xml")
 public class Main {
 
 		    public static void main(String[] args) {
 		    	System.out.println("Hello world");
 //Phase 2
-		        new AnnotationConfigApplicationContext(Main.class);
+//		        new AnnotationConfigApplicationContext(Main.class);
 		    }
 }

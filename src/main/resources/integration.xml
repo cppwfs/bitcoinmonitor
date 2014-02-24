@@ -21,13 +21,13 @@
 	<int-http:outbound-gateway id='bitstampgateway'
 		request-channel='bitStampHttp' url='https://www.bitstamp.net/api/ticker/'
 		http-method='GET' expected-response-type='java.lang.String' charset='UTF-8'
-		reply-timeout='5000' reply-channel='transformChannel'>
+		reply-timeout='5000' reply-channel='files'>
 	</int-http:outbound-gateway>
 
 	<int-http:outbound-gateway id='coinbasegateway'
 		request-channel='coinbaseHttp' url='https://coinbase.com/api/v1/prices/buy'
 		http-method='GET' expected-response-type='java.lang.String' charset='UTF-8'
-		reply-timeout='10000' reply-channel='transformChannel'>
+		reply-timeout='10000' reply-channel='files'>
 	</int-http:outbound-gateway>
 
 <!--  Pollers to call http gateways to get latest bids -->
@@ -43,9 +43,10 @@
 	</int:inbound-channel-adapter>
 
 <!-- Phase 3 -->
+<!-- 
 	<int:transformer input-channel="transformChannel" ref="transform"
 		output-channel="files" />
-
+ -->
 <!-- Phase 4-->
 <!-- 
 	<int:channel id="mqttOut"></int:channel>

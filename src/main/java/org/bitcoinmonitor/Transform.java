@@ -11,10 +11,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 // Phase 3
-@Component
+//@Component
 public class Transform {
 // Phase 3
-	@Transformer(  )
+//	@Transformer(  )
 	public String transformToCommonFormat(String json) throws JsonMappingException, JsonParseException, IOException{
 	ObjectMapper objectMapper = new ObjectMapper();
     
