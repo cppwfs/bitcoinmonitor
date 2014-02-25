@@ -4,6 +4,7 @@ bitcoinmonitor
 Monitors the bids in USD for bitcoin.
 
 # Phase 1
+* git clone git@github.com:cppwfs/bitcoinmonitor.git
 * Go to the bitcoinmonitor directory
 * Set JAVA_HOME environment variable to your java instance
 * ./gradlew run -or- gradlew.bat run
@@ -61,6 +62,7 @@ Monitors the bids in USD for bitcoin.
 ### Start MQTT Monitor
 
 * Open another command window
+* git clone git@github.com:cppwfs/mqttmonitor.git
 * Go to the mqttmonitor directory
 * ./gradlew run -or- gradlew.bat run
 
